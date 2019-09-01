@@ -1,26 +1,27 @@
-require("@babel/register");
 const base = require('./conf/base.conf');
-let baseArgs = ! process.env.SHOW_UI ? ['--headless', '--disable-gpu'] : [];
 
-let sauce = {
-	services: ['sauce'],
-	user: process.env.SAUCE_USERNAME,
-	key: process.env.SAUCE_ACCESS_KEY,
-};
+//require('child_process').execSync('ls').toString()
 
 exports.config = {
-	...base.config,
-    services: ['selenium-standalone'],
+    ...base.config,
+    services: [
+        'selenium-standalone'
+    ],
+    //...require('./conf/selenium.conf').config,
     capabilities: [
         {
             browserName: 'chrome',
             "goog:chromeOptions": {
+                //binary: `${require('puppeteer').executablePath()}`,
                 args: [ 
-                    ...baseArgs,
+                    ...[ !! process.env.SHOW ? '' : '--headless' ],
+                    '--disable-gpu',
                     '--disable-infobars',
-					'--fast-start',
-					'--auto-open-devtools-for-tabs',
-                ],
+                    '--fast-start',
+                    '--no-sandbox',
+                    '--disable-dev-shm-usage',
+                    //'--auto-open-devtools-for-tabs',
+                ].filter(Boolean),
             }
         }
     ],
