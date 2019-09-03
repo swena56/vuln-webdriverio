@@ -8,8 +8,8 @@ describe('HTML injection', function () {
 	it('reflected get - low', function () {
 		Home.login();
 		Home.loadPage('/htmli_get.php');
-		$('#firstname').assertExistence();
-		$('#lastname').assertExistence();
+		$('#firstname').assert();
+		$('#lastname').assert();
 		$('select[name=security_level]').selectByVisibleText('low')
 		const firstnamePayload = '<div id="firstnameInjected">firstname<div>';
 		const lastnamePayload = '<div id="lastnameInjected">lastname<div>';
@@ -25,8 +25,8 @@ describe('HTML injection', function () {
 	it('reflected get - medium', function () {
 		Home.login();
 		Home.loadPage('/htmli_get.php');
-		$('#firstname').assertExistence();
-		$('#lastname').assertExistence();
+		$('#firstname').assert();
+		$('#lastname').assert();
 		const firstnamePayload = '<div id="firstnameInjected">firstname<div>';
 		const lastnamePayload = '<div id="lastnameInjected">lastname<div>';
 		$('select[name=security_level]').selectByVisibleText('medium')
@@ -39,7 +39,7 @@ describe('HTML injection', function () {
 		expect($('#lastnameInjected').isExisting()).to.equal(true,'Injected HTML not detected in #lastname form element on medium');
 	});
 
-	it('post', function () {
+	it.skip('post', function () {
 		'/htmli_post.php';
 	});
 

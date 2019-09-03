@@ -20,12 +20,4 @@ export default class Base {
                 	browser.pause(additionalWait);
                 }
 	}
-
-        assertElement(element){
-                expect(
-                        element &&
-                        element.selector &&
-                        element.isExisting()
-                ).to.equal(true,`Element '${element.selector}' does not exist`);
-        }
 }

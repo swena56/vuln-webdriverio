@@ -62,8 +62,10 @@ exports.config = {
                     '--fast-start',
                     '--no-sandbox',
                     '--disable-dev-shm-usage',
-                    `--window-size=${800},${600}`,
                     //'--auto-open-devtools-for-tabs',
+                    ...[ process.env.DEVTOOLS ? `--remote-debugging-port=${parseInt(process.env.PORT||9222)}` : ''],
+                    `--window-size=${parseInt(process.env.WINDOW_WIDTH || 1920)},${parseInt(process.env.WINDOW_HEIGHT || 1080)}`,
+                    ...[process.env.USER_AGENT ? `--user-agent="${process.env.USER_AGENT}"` : ''],
                 ].filter(Boolean),
             }
         }

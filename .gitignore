@@ -1,2 +1,9 @@
-node_modules
+/node_modules
+/errorShots
+/allure-results
+/allure-report
+/junit-results
+/.idea
+/screenshots
+selenium-standalone.txt
 server

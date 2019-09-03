@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio wdio.conf.js",
-    "test-injection": "wdio wdio.conf.js --suite injection"
+    "test-injection": "wdio wdio.conf.js --suite injection",
+    "report": "allure generate --clean allure-results && allure open -h '0.0.0.0'"
   },
   "keywords": [],
   "author": "",
@@ -25,11 +26,17 @@
     "@wdio/selenium-standalone-service": "^5.12.1",
     "@wdio/spec-reporter": "^5.12.1",
     "@wdio/sync": "^5.12.3",
+    "allure-commandline": "^2.9.0",
     "chai": "^4.2.0",
+    "chalk": "^2.4.2",
     "puppeteer": "^1.19.0",
+    "wdio-video-reporter": "^1.4.4",
     "webdriverio": "^5.12.5"
   },
   "dependencies": {
-    "command-line-args": "^5.1.1"
+    "command-line-args": "^5.1.1",
+    "glob": "^7.1.4",
+    "request": "^2.88.0",
+    "sharp": "^0.23.0"
   }
 }

@@ -20,61 +20,40 @@ exports.configure = function (browser) {
         return this;
 	}, true);
 
-	// browser.addCommand('highlight', function(selector, color='red') {
+	global.chalk = require('chalk');
 
-	// 	function highlightElement(selector) {
-	// 		const xPathToCss = require('xpath-to-css');
-	// 		if (selector.substr(0, 1) === '/') {
-	// 			if (selector.includes('text')) {
-	// 				console.log(`Cannot highlight element that uses "text" value as part of its selector`)
-	// 			} else {
-	// 				selector = xPathToCss(selector)
-	// 			}
-	// 		}
-	// 		const result = browser
-	// 			.execute(function(selector,color) {
-	// 				if (!window.highlighted) {
-	// 					window.highlighted = []
-	// 				}
-	// 				let element = window.$(selector);
-	// 				if (element.length > 0) {
-	// 					element.css({
-	// 						'border-color': color,
-	// 						'border-width': '3px',
-	// 						'border-style': 'solid',
-	// 						'border-radius': '5px'
-	// 					});
-	// 					window.highlighted.push(selector)
-	// 				}
-	// 				return element.length
-	// 			}, selector, color);
+	browser.addCommand("highlight", function (color = 'red') {
+		console.log(`element highlight: ${this.selector} with color: ${color}`);
+		if( this.isExisting() ){
+			this.execute((selector,color)=>{
+				if (!window.highlighted) {
+					window.highlighted = []
+				}
+				var element = window.$(selector);
+				if (element.length > 0) {
+					element.css({
+						'border-color': color,
+						'border-width': '3px',
+						'border-style': 'solid',
+						'border-radius': '5px'
+					});
+					window.highlighted.push(selector)
+				}
+			},this.selector,color);
+		}
+	},true);
 
-	// 		if (result.value === 0) {
-	// 			console.log(`Element not found!`)
-	// 		}
-	// 	}
-
-	// 	if (selector) {
-	// 		highlightElement(selector)
-	// 	} else {
-	// 		const element = this.element(selector);
-	// 		if (element.state === 'success') {
-	// 			highlightElement(element.selector)
-	// 		}
-	// 	}
-	// });
-
-	// browser.addCommand('removeHighlights', () => {
- //        return browser.execute(function(selector) {
- //            if (window.highlighted) {
- //                window.highlighted.forEach(function(selector) {
- //                    window.$(selector)
- //                        .css({
- //                            'border-width': '0px'
- //                        })
- //                })
- //                window.highlighted = []
- //            }
- //        })
- //    })
+	browser.addCommand('removeHighlights', () => {
+		return browser.execute(() => {
+			if (window.highlighted) {
+				window.highlighted.forEach(function(selector) {
+					window.$(selector)
+						.css({
+							'border-width': '0px'
+						})
+				});
+				window.highlighted = []
+			}
+		});
+	});
 };
