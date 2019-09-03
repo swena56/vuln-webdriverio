@@ -11,12 +11,13 @@ exports.configure = function (browser) {
 
 	require("@babel/register");
 
-	browser.addCommand("assertExistence", function () {
+	browser.addCommand("assert", function () {
 		expect(
                 this &&
                 this.selector &&
                 this.isExisting()
         ).to.equal(true,`Element '${this.selector}' does not exist`);
+        return this;
 	}, true);
 
 	// browser.addCommand('highlight', function(selector, color='red') {

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "wdio wdio.conf.js"
+    "test": "wdio wdio.conf.js",
+    "test-injection": "wdio wdio.conf.js --suite injection"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "@babel/register": "^7.5.5",
     "@wdio/allure-reporter": "^5.12.1",
     "@wdio/cli": "^5.12.5",
+    "@wdio/devtools-service": "^5.12.3",
     "@wdio/dot-reporter": "^5.12.1",
     "@wdio/junit-reporter": "^5.12.3",
     "@wdio/local-runner": "^5.12.5",
@@ -26,5 +28,8 @@
     "chai": "^4.2.0",
     "puppeteer": "^1.19.0",
     "webdriverio": "^5.12.5"
+  },
+  "dependencies": {
+    "command-line-args": "^5.1.1"
   }
 }

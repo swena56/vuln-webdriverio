@@ -6,6 +6,7 @@ class Home extends Base {
 	get LOGIN_FIELD(){ return $('input#login'); }
 	get PASSWORD_FIELD(){ return $('input#password'); }
 	get SECURITY_DROPDOWN(){ return $('select[name=security_level]'); }
+	get SECURITY_SET_BUTTON(){ return $('button[name=form_security_level]'); }
 
 	changeSecurityLevel( level ){
 		level = new String(level).toLowerCase();
@@ -20,9 +21,13 @@ class Home extends Base {
 			'Security drop down does not exist'
 		);
 		this.SECURITY_DROPDOWN.selectByVisibleText(level);
+		expect(this.SECURITY_SET_BUTTON.isExisting()).to.equal(true,
+			'Security set button does not exist'
+		);
+		this.SECURITY_SET_BUTTON.click();
 	}
 
-	login(){
+	login(urlString){
 		this.loadPage('/login.php');
 		expect(
 			$('#main h1').isExisting() &&
@@ -39,10 +44,15 @@ class Home extends Base {
 		this.LOGIN_BUTTON.scrollIntoView();
 		this.LOGIN_BUTTON.click();
 		this.waitForPageload(1000);
+		if(urlString){
+			this.loadPage(urlString);
+		}
 	}
 
 	logout(){}
 
 }
+
+exports.Home = Home;
 
 export default new Home();

@@ -7,19 +7,22 @@ A test suite for testing the top website vulnerabilities using webdriverio.
 Setup Vulnerable Webserver
 --------------------------
 
-Use docker to create a bWAPP server.  After pulling the image
+Use docker to create a bWAPP server.  After pulling the docker image
 
 ```bash
+	/etc/init.d/docker start
 	docker pull raesene/bwapp
-	docker run -d -p 80:80 raesene/bwapp 
+	docker run -d -p 80:80 raesene/bwapp
+	firefox http://localhost/install.php?install=yes
 ```
 
-Setup Test Suite
+Test Suite
 ----------------
 
 ```bash
 	npm install
-	npm test 
+	npm test
+	npm test -- --suite injection 
 ```
 
 Resources

@@ -2,7 +2,7 @@ export default class Base {
 
         loadPage(url='/'){
                 browser.url(url);
-                this.waitForPageload(2000);
+                this.waitForPageload();
         }
 
 	waitForPageload(additionalWait=0){
